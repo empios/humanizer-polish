@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "humanizer-polish",
+  "description": "Redaguje polski tekst brzmiący jak wygenerowany przez AI, żeby brzmiał jak autor, i nie zmienia jego treści.",
+  "version": "1.0.0",
+  "author": {
+    "name": "empios",
+    "url": "https://github.com/empios"
+  },
+  "homepage": "https://github.com/empios/humanizer-polish",
+  "repository": "https://github.com/empios/humanizer-polish",
+  "license": "MIT",
+  "keywords": ["polish", "polski", "writing", "editing", "humanize", "legal", "academic", "style"],
+  "skills": ["./"]
+}

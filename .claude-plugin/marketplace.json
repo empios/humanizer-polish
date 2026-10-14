@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "humanizer-polish",
+  "owner": {
+    "name": "empios",
+    "url": "https://github.com/empios"
+  },
+  "description": "Instalacja humanizer-polish jako wtyczki Claude.",
+  "plugins": [
+    {
+      "name": "humanizer-polish",
+      "source": "./",
+      "description": "Redaguje polski tekst brzmiący jak wygenerowany przez AI, żeby brzmiał jak autor, i nie zmienia jego treści.",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": ["polish", "polski", "writing", "editing", "humanize", "legal", "academic", "style"]
+    }
+  ]
+}
