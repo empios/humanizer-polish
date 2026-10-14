@@ -228,10 +228,13 @@ def zmierz(akapity: list[str]) -> dict:
     na_poczatku = sum(1 for z in wszystkie
                       if any(z.lower().startswith((lacznik + " ", lacznik + ",")) for lacznik in LACZNIKI))
 
+    # Zwrot w cudzysłowie tekst omawia, a nie stosuje („Kiedy nie działać” w SKILL.md).
+    bez_cytatow = [re.sub(r"„[^”]*”|\"[^\"]*\"", "„…”", z) for z in wszystkie]
+    bez_cytatow = [re.sub(r"(?i)\bsłowa kluczowe\b", "", z) for z in bez_cytatow]
     frazy = {}
     for nr, (nazwa, wzory) in FRAZY.items():
         trafienia = []
-        for z in wszystkie:
+        for z in bez_cytatow:
             for wzor in wzory:
                 for m in re.finditer(wzor, z, re.IGNORECASE):
                     trafienia.append(m.group(0))

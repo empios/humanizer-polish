@@ -1,5 +1,9 @@
 # Historia zmian
 
+## 1.0.1
+
+- `metryki_pl.py` nie liczy zwrotów w cudzysłowie, bo tekst je omawia, a nie stosuje (zgodnie z „Kiedy nie działać”), ani etykiety „Słowa kluczowe” jako wzorca §12. Oba fałszywe alarmy wyszły na prawdziwych manuskryptach naukowych.
+
 ## 1.0.0
 
 Pierwsza wersja. 30 wzorców w siedmiu grupach (A–G).

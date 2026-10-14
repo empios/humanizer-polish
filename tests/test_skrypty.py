@@ -73,6 +73,10 @@ class Metryki(unittest.TestCase):
         self.assertEqual(wynik["typografia"]["pauza (—)"], 1)
         self.assertEqual(wynik["typografia"]["kropka dziesiętna (do sprawdzenia)"], 1)
 
+    def test_zwrot_w_cudzyslowie_i_slowa_kluczowe_to_nie_wzorzec(self):
+        wynik = metryki_pl.zmierz(["Reguła zamienia „warto wskazać” na nic. Słowa kluczowe: prawo, styl."])
+        self.assertEqual(wynik["frazy"], {})
+
     def test_numer_sekcji_to_nie_kropka_dziesietna(self):
         wynik = metryki_pl.zmierz(["Opis jest w sekcji 3.2 i w tabeli 1.4 tego artykułu."])
         self.assertNotIn("kropka dziesiętna (do sprawdzenia)", wynik["typografia"])

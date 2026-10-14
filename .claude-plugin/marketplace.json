@@ -11,7 +11,7 @@
       "name": "humanizer-polish",
       "source": "./",
       "description": "Redaguje polski tekst brzmiący jak wygenerowany przez AI, żeby brzmiał jak autor, i nie zmienia jego treści.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "license": "MIT",
       "keywords": ["polish", "polski", "writing", "editing", "humanize", "legal", "academic", "style"]
     }
