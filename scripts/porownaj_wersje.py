@@ -2,7 +2,7 @@
 """Porównuje dwie wersje tekstu i wypisuje elementy chronione, które się zmieniły.
 
 Użycie: python3 scripts/porownaj_wersje.py PRZED PO [--json] [--linie]
-PRZED, PO: .txt, .md albo .docx. Kod wyjścia 1 oznacza różnice do sprawdzenia (§27–§29).
+PRZED, PO: .txt, .md albo .docx. Kod wyjścia 1 oznacza różnice do sprawdzenia (§27-§29).
 Liczby porównujemy po ujednoliceniu zapisu: „0,53” = „0.53”, „1 804” = „1804”, „8” = „osiem”.
 """
 
@@ -22,7 +22,7 @@ _LICZBA = re.compile(
     r"(?<![\w.,])−?\d{1,3}(?:[ \u00a0\u202f]\d{3})+(?:[.,]\d+)?(?![\w])"
     r"|(?<![\w.,])−?\d+(?:[.,]\d+)*(?!\w)"
 )
-# Liczebniki 2–20 zapisane słownie; „jeden” pomijamy, bo bywa zaimkiem („jeden z”).
+# Liczebniki 2-20 zapisane słownie; „jeden” pomijamy, bo bywa zaimkiem („jeden z”).
 LICZEBNIKI = {
     2: "dwa|dwie|dwóch|dwóm|dwoma", 3: "trzy|trzech|trzem|trzema", 4: "cztery|czterech|czterem|czterema",
     5: "pięć|pięciu|pięcioma", 6: "sześć|sześciu|sześcioma", 7: "siedem|siedmiu|siedmioma",
@@ -104,7 +104,9 @@ def wyciagnij(tekst: str) -> dict[str, Counter]:
         "liczby": liczby,
         "przepisy": Counter(_norm(m.group(0)) for m in _PRZEPIS.finditer(tekst)),
         "sygnatury": Counter(_norm(m.group(0)) for m in _SYGNATURA.finditer(tekst)),
-        "cytowania i adresy": Counter(_norm(m.group(0)).rstrip(".") for m in _CYTOWANIE.finditer(tekst)),
+        # Półpauza w „[3–5]” zamieniona na łącznik (§8) to ten sam przedział.
+        "cytowania i adresy": Counter(_norm(m.group(0)).rstrip(".").replace("–", "-")
+                                      for m in _CYTOWANIE.finditer(tekst)),
         "cytaty": cytaty,
         "symbole zastępcze": Counter(m.group(0) for m in _SYMBOL.finditer(tekst)),
         "modalność": Counter({k: len(re.findall(w, maly)) for k, w in MODALNE.items()}),
@@ -149,7 +151,7 @@ def raport(nazwa_a: str, nazwa_b: str, roznice: dict) -> str:
                 linie.append("  zniknęło: " + "; ".join(r["zniknelo"]))
             if r["pojawilo_sie"]:
                 linie.append("  pojawiło się: " + "; ".join(r["pojawilo_sie"]))
-    linie += ["", "Każda różnica to błąd, chyba że wzorzec z SKILL.md kazał coś wyciąć (§27–§29)."]
+    linie += ["", "Każda różnica to błąd, chyba że wzorzec z SKILL.md kazał coś wyciąć (§27-§29)."]
     return "\n".join(linie)
 
 

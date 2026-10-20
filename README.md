@@ -81,7 +81,7 @@ Opcja `--linie` traktuje każdą linię pliku tekstowego jako osobny akapit.
 
 ## Jak to działa
 
-`SKILL.md` wyjaśnia, skąd biorą się wzorce (model wybiera wariant pasujący do najszerszego odbiorcy), opisuje kolejność pracy (pomiar, oznaczenie wzorców, szkic, zmiana struktury, sprawdzenie, wersja końcowa) i 30 wzorców w siedmiu grupach. Grupy A–F to wzorce stylu, od najsilniejszych. Grupa G to zasady bezpieczeństwa treści dla tekstów prawnych i naukowych.
+`SKILL.md` wyjaśnia, skąd biorą się wzorce (model wybiera wariant pasujący do najszerszego odbiorcy), opisuje kolejność pracy (pomiar, oznaczenie wzorców, szkic, zmiana struktury, sprawdzenie, wersja końcowa) i 30 wzorców w siedmiu grupach. Grupy A-F to wzorce stylu, od najsilniejszych. Grupa G to zasady bezpieczeństwa treści dla tekstów prawnych i naukowych. Skill nie wymyśla zdań: każde zdanie wersji końcowej pochodzi ze zdania źródła.
 
 Dwie lekcje z praktyki, które skill zapisuje wprost: podmiana synonimów bez zmiany struktury prawie nie zmienia rytmu tekstu, a każdą redakcję trzeba sprawdzić porównaniem liczb i przepisów, bo parafraza gubi je po cichu.
 
@@ -92,8 +92,8 @@ Dwie lekcje z praktyki, które skill zapisuje wprost: podmiana synonimów bez zm
 | # | Wzorzec | Przykład | Co zrobić |
 |---|---|---|---|
 | 1 | **Nie X, lecz Y** | „Nie chodzi o X, lecz o Y”, „Nie oznacza to, że X. Oznacza to, że Y.” | Podać myśl wprost; kontrast normatywny zostaje |
-| 2 | **Puenty i dramatyczne równoważniki** | „To zmienia wszystko.”, „Wniosek jest prosty:”, „Bez kompromisów. Bez wyjątków.” | Wyciąć zamknięcie, które powtarza; połączyć równoważniki w zdanie |
-| 3 | **Pozorna głębia** | „U podstaw leży…”, „Prawdziwe pytanie brzmi…”, „X to waluta Y” | Zastąpić konkretnym twierdzeniem |
+| 2 | **Puenty i dramatyczne równoważniki** | „To zmienia wszystko.”, „Wniosek jest prosty:”, „Bez kompromisów. Bez wyjątków.”, pusty komentarz po cytacie, pytanie retoryczne bez odpowiedzi | Wyciąć zamknięcie, które powtarza; połączyć równoważniki w zdanie |
+| 3 | **Pozorna głębia** | „U podstaw leży…”, „Prawdziwe pytanie brzmi…”, „X to waluta Y”, „bezpieczna przystań”, „paliwo dla algorytmów” | Zastąpić dosłownym twierdzeniem, bez nowych szczegółów |
 | 4 | **Zapowiedź zamiast treści** | „Warto podkreślić, że”, „Należy wskazać, że”, „W tym kontekście” | Zacząć od tego, co po „że”; „należy” nakazujące zostaje |
 | 5 | **Polemika z nikim** | „Można by sądzić, że…”, „Kuszące byłoby…” | Usunąć obronę przed zarzutem, którego nikt nie postawił |
 
@@ -103,7 +103,7 @@ Dwie lekcje z praktyki, które skill zapisuje wprost: podmiana synonimów bez zm
 |---|---|---|---|
 | 6 | **Wymuszone trójki** | „przejrzystość, rzetelność oraz odpowiedzialność” | Zostawić trzy człony tylko wtedy, gdy treść ma trzy części |
 | 7 | **Powtarzane początki i łączniki** | „Ponadto… Co więcej… Dodatkowo…”, „więc” w co drugim zdaniu | Usunąć zbędny łącznik, zmienić powtarzany, połączyć zdania |
-| 8 | **Myślnik jako uniwersalny łącznik** | „procedura—wprowadzona bez konsultacji—obejmuje” | Przecinek, dwukropek, nawias albo kropka; półpauza w przedziałach zostaje |
+| 8 | **Myślnik jako uniwersalny łącznik** | „procedura—wprowadzona bez konsultacji—obejmuje” | Przecinek, dwukropek, nawias albo kropka; bez pauzy i półpauzy, jedyna kreska to łącznik ASCII (-), także w przedziałach |
 | 9 | **Piętrowe asekuracje** | „można by potencjalnie przypuszczać, że mogłoby w pewnym stopniu” | Jedno zastrzeżenie, jeśli uzasadnia je źródło |
 | 10 | **Jednolity rytm i szyk** | zdania podobnej długości, każde od podmiotu | Zmieniać długość zdań i akapitów, używać inwersji |
 | 11 | **Rzeczowniki zamiast czasowników** | „dokonano analizy w celu przeprowadzenia weryfikacji” | Czasownik zamiast rzeczownika odczasownikowego |
@@ -114,10 +114,10 @@ Dwie lekcje z praktyki, które skill zapisuje wprost: podmiana synonimów bez zm
 |---|---|---|---|
 | 12 | **Słowa nadużywane przez modele** | kluczowy, kompleksowy, holistyczny, w dobie, krajobraz | Konkretne słowo albo nic |
 | 13 | **Nadawanie wagi** | „ma istotne znaczenie”, „odgrywa kluczową rolę”, „kamień milowy” | Zostawić fakt, usunąć wagę |
-| 14 | **Zbędne wartościowanie i banalne otwarcia** | „cenne, unikatowe zbiory”, „W dobie dynamicznego rozwoju…” | Usunąć ocenę albo podać fakt, który ją uzasadnia |
+| 14 | **Zbędne wartościowanie i banalne otwarcia** | „cenne, unikatowe zbiory”, „przerażeni wydawcy”, „W dobie dynamicznego rozwoju…” | Usunąć ocenę albo podać fakt, który ją uzasadnia |
 | 15 | **Mgliste powiązanie** | „związany z”, „w kontekście”, „w odniesieniu do” | Nazwać relację, jeśli podaje ją źródło |
 | 16 | **Imiesłowowe doczepki** | „…, podkreślając wagę…”, „…, co świadczy o…” | Zostawić fakt, doczepkę tylko ze źródłem |
-| 17 | **Pożyczony autorytet i puste przypisy** | „Badania pokazują…” bez przypisu, `utm_source=chatgpt.com` | Wskazać źródło albo usunąć autorytet; nie dopisywać przypisów |
+| 17 | **Pożyczony autorytet i puste przypisy** | „Badania pokazują…” bez przypisu, `utm_source=chatgpt.com`, DOI do całego tomu, bibliografia spoza tematu | Wskazać źródło albo usunąć autorytet; nie dopisywać przypisów; błędne przypisy zgłosić |
 | 18 | **Kalki z angielskiego** | „w oparciu o”, „adresować problem”, „zbiór złoty”, „dedykowany” | Polski odpowiednik; przyjęty termin dziedzinowy zostaje |
 
 ### D. Formatowanie i typografia
@@ -131,7 +131,7 @@ Dwie lekcje z praktyki, które skill zapisuje wprost: podmiana synonimów bez zm
 
 | # | Wzorzec | Przykład | Co zrobić |
 |---|---|---|---|
-| 21 | **Formułki czatu i zastrzeżenia o wiedzy** | „Oto poprawiona wersja”, „Według mojej wiedzy…” | Usunąć |
+| 21 | **Formułki czatu i zastrzeżenia o wiedzy** | „Oto poprawiona wersja”, „Według mojej wiedzy…”, „Zgodnie z poleceniem…”, „[Imię i nazwisko autora]” | Usunąć; pola szablonu zgłosić |
 | 22 | **Tekst o sobie samym** | „Jak wspomniano powyżej”, „W niniejszym artykule…” | Jedno zdanie o układzie pracy zostaje; reszta do usunięcia |
 | 23 | **Podsumowanie po każdej sekcji** | „Podsumowując,”, „Reasumując,” | Jedno podsumowanie tam, gdzie wymaga go gatunek |
 
@@ -140,7 +140,7 @@ Dwie lekcje z praktyki, które skill zapisuje wprost: podmiana synonimów bez zm
 | # | Wzorzec | Przykład | Co zrobić |
 |---|---|---|---|
 | 24 | **Poszarpana parafraza** | akapit gubi zapowiedzianą myśl, zdania do siebie nie pasują | Jedna myśl na akapit; niejasny termin zgłosić |
-| 25 | **Ogólnik zamiast faktu** | „liczne badania”, „znaczna poprawa” | Liczba, data, nazwa ze źródła; niczego nie wymyślać |
+| 25 | **Ogólnik zamiast faktu** | „liczne badania”, „znaczna poprawa”, „z polskiej perspektywy” pasujące do każdego kraju, pusta definicja | Liczba, data, nazwa ze źródła; niczego nie wymyślać |
 | 26 | **Tłumaczenie adresatowi tego, co wie** | „Jak Pan wie, umowa została zawarta…” | Zacząć od odpowiedzi albo decyzji |
 
 ### G. Czego redakcja nie może zepsuć
@@ -150,7 +150,7 @@ Dwie lekcje z praktyki, które skill zapisuje wprost: podmiana synonimów bez zm
 | 27 | **Elementy chronione** | liczby, kwoty, daty, art., §, sygnatury, cytaty, [SYMBOLE] | Bez zmian; sprawdzić `porownaj_wersje.py` |
 | 28 | **Modalność i przeczenie** | „musi” ≠ „może”, „należy złożyć” ≠ „należy wskazać, że” | Siła normy i każde „nie” zostają |
 | 29 | **Role stron** | najemca i wynajmujący, powód i pozwany | Sprawdzić ręcznie po każdej zmianie szyku |
-| 30 | **Terminy, których nie zastąpi synonim** | „modalność” ≠ „wydźwięk”, „co do zasady” ≠ „zasadniczo” | Powtórzyć termin, objaśnić raz |
+| 30 | **Terminy, których nie zastąpi synonim** | „modalność” ≠ „wydźwięk”, „co do zasady” ≠ „zasadniczo” | Powtórzyć termin; błędną definicję zgłosić, nie dopisywać |
 
 ## Źródła
 
@@ -158,7 +158,7 @@ Pełne opisy: [`references/zrodla.md`](references/zrodla.md).
 
 - Siqi Chen, [blader/humanizer](https://github.com/blader/humanizer) (MIT), oparty na [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing).
 - [humanize-pl](https://github.com/empios/humanize-pl): polskie listy fraz i kontrole elementów chronionych.
-- hum/dev: [rozpoznawanie tekstu akademickiego AI bez detektora](https://blog.humanistyka.dev/2026/10/jak-bez-pangrama-rozpoznac-tekst-akademicki-wygenerowany-przez-ai), [stylometria tekstów maszynowych](https://blog.humanistyka.dev/2026/03/stylometryczne-cechy-tekstow-generowanych-maszynowo), [taksonomia GAIDeT](https://blog.humanistyka.dev/2025/09/taksonomia-gaidet-jak-raportowac-uzycie-sztucznej-inteligencji-w-pisaniu).
+- hum/dev: [rozpoznawanie tekstu akademickiego AI bez detektora](https://blog.humanistyka.dev/2026/10/jak-bez-pangrama-rozpoznac-tekst-akademicki-wygenerowany-przez-ai), [stylometria tekstów maszynowych](https://blog.humanistyka.dev/2026/03/stylometryczne-cechy-tekstow-generowanych-maszynowo), [taksonomia GAIDeT](https://blog.humanistyka.dev/2025/09/taksonomia-gaidet-jak-raportowac-uzycie-sztucznej-inteligencji-w-pisaniu), [eksperyment z wpisem z AI](https://blog.humanistyka.dev/2026/02/probowalem-wygenerowac-w-ai-wpis-na-tego-bloga-i-skonczylo-sie-to-katastrofa), [slop w tekstach](https://blog.humanistyka.dev/2025/12/jak-rozpoznawac-slopy-ai-w-tekstach-na-pewno-nie-maszynowo), [akademicki slop](https://blog.humanistyka.dev/2026/08/janet-h-murray-nick-monfort-i-mykotoksyny-w-krowim-mleku), [perpleksja i Wikipedia](https://blog.humanistyka.dev/2025/08/jak-rozpoznac-czy-tekst-zostal-wygenerowany-przez-ai-ograniczenia-perpleksji-i-propozycja-wikipedii), [pięć grup cech](https://blog.humanistyka.dev/2026/02/rozpoznawanie-tekstow-ai-piec-grup-cech-zamiast-jednego-wskaznika).
 - Przystalski K, Argasiński JK, Grabska-Gradzińska I, Ochab JK. Stylometry recognizes human and LLM-generated texts in short samples. *Expert Systems with Applications*. 2026;296:129001. doi:[10.1016/j.eswa.2025.129001](https://doi.org/10.1016/j.eswa.2025.129001)
 - Suchikova Y. i in. GAIDeT (Generative AI Delegation Taxonomy). *Accountability in Research*. 2025. doi:[10.1080/08989621.2025.2544331](https://doi.org/10.1080/08989621.2025.2544331)
 

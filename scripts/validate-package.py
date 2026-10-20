@@ -117,8 +117,8 @@ for path in sorted(set(re.findall(r"`((?:scripts|references)/[^`\s]+)`", SKILL))
 # The skill must follow its own dash rule (§8) outside the section that describes it.
 section_8 = require(re.search(r"(?ms)^### 8\. .*?(?=^### 9\. )", SKILL), "Keep pattern 8 before pattern 9")
 outside = SKILL.replace(section_8.group(0), "")
-if "—" in outside or re.search(r"\s--\s", outside):
-    raise SystemExit("SKILL.md uses an em dash or a double hyphen outside pattern 8")
+if "—" in outside or "–" in outside or re.search(r"\s--\s", outside):
+    raise SystemExit("SKILL.md uses an em dash, an en dash or a double hyphen outside pattern 8; use an ASCII hyphen")
 # Polish quotes open with „ and close with ”; an English opening “ belongs only in pattern 20.
 section_20 = require(re.search(r"(?ms)^### 20\. .*?(?=^## )", SKILL), "Keep pattern 20 before the next section")
 if "“" in SKILL.replace(section_20.group(0), ""):

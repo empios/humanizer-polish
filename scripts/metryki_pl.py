@@ -35,7 +35,8 @@ FRAZY: dict[int, tuple[str, list[str]]] = {
     3: ("Pozorna głębia", [
         r"\bw istocie\b", r"\bu podstaw\w*(?:\s+\w+)?\s+leży\b", r"\bsedn\w+ (?:problemu|sprawy)\b",
         r"\bprawdziwe pytanie brzmi\b", r"\btak naprawdę liczy się\b", r"\bfundamentaln\w+ kwesti\w+",
-        r"\bw gruncie rzeczy\b",
+        r"\bw gruncie rzeczy\b", r"\bbezpieczn\w+ przysta\w+", r"\bcyfrow\w+ amnezj\w+",
+        r"\bbibliotek\w+ aleksandryjsk\w+", r"\bpaliw\w* dla (?:algorytm|model|sztuczn|ai\b)\w*",
     ]),
     4: ("Zapowiedź zamiast treści", [
         r"\b(?:warto|należy)\s+(?:(?:również|także|przy tym|jednak)\s+)?(?:wskazać|zauważyć|podkreślić|"
@@ -109,6 +110,8 @@ FRAZY: dict[int, tuple[str, list[str]]] = {
         r"\bmam nadzieję, że (?:to|ta|te) (?:pomoże|pomogą|okaże)", r"\bchętnie pomogę\b",
         r"\bdaj(?:cie)? znać\b", r"\bświetne pytanie\b", r"\bjako model językowy\b",
         r"\bwedług mojej wiedzy\b", r"\bnie mam dostępu do\b",
+        r"^zgodnie z (?:twoją |twoim )?(?:prośbą|poleceniem)\b", r"\bunsupported markdown\b",
+        r"\[(?:imię|nazwisko|wstaw|tytuł)[^\]]{0,40}\]",
     ]),
     22: ("Tekst o sobie samym", [
         r"\bw niniejsz\w+ (?:artykule|pracy|rozdziale|opracowaniu)\b",
@@ -121,6 +124,7 @@ FRAZY: dict[int, tuple[str, list[str]]] = {
         r"^(?:podsumowując|reasumując|konkludując|jak widać)\b", r"\bwszystko to pokazuje\b",
         r"\bz powyższego wynika\b",
     ]),
+    25: ("Ogólnik zamiast faktu", [r"\bz polskiej perspektywy\b"]),
 }
 
 LACZNIKI = [
@@ -247,7 +251,8 @@ def zmierz(akapity: list[str]) -> dict:
     typografia = {
         "pauza (—)": caly.count("—"),
         "podwójny łącznik (--)": len(re.findall(r"\s--\s", caly)),
-        "półpauza ze spacjami ( – )": caly.count(" – "),
+        "półpauza (–)": caly.count("–"),
+        "łącznik ze spacjami ( - ), czyli myślnik": len(re.findall(r"\s-\s", caly)),
         "cudzysłów prosty lub angielski": len(re.findall(r"[\"“]", caly)),
         "kropka dziesiętna (do sprawdzenia)": _kropki_dziesietne(caly),
         "przecinek przed i/oraz/lub/albo (do sprawdzenia)": len(re.findall(r",\s(?:i|oraz|lub|albo)\s", caly)),

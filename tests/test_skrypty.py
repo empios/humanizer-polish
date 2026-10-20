@@ -73,6 +73,22 @@ class Metryki(unittest.TestCase):
         self.assertEqual(wynik["typografia"]["pauza (—)"], 1)
         self.assertEqual(wynik["typografia"]["kropka dziesiętna (do sprawdzenia)"], 1)
 
+    def test_kreski_typograficzne_i_lacznik_ze_spacjami(self):
+        wynik = metryki_pl.zmierz(["Dane z lat 2019–2024 – jak wynika z raportu – są pełne. Spór polsko-niemiecki - trwa."])
+        self.assertEqual(wynik["typografia"]["półpauza (–)"], 3)
+        self.assertEqual(wynik["typografia"]["łącznik ze spacjami ( - ), czyli myślnik"], 1)
+        self.assertNotIn("pauza (—)", wynik["typografia"])
+
+    def test_metafory_resztki_czatu_i_polska_perspektywa(self):
+        wynik = metryki_pl.zmierz([
+            "Archiwum stało się paliwem dla algorytmów i bezpieczną przystanią treści. "
+            "Zgodnie z Twoją prośbą opisuję zjawisko. Jak pisze [Imię i nazwisko autora], to ważne. "
+            "Z polskiej perspektywy spór nie jest abstrakcyjny."
+        ])
+        self.assertEqual(wynik["frazy"][3]["liczba"], 2)
+        self.assertEqual(wynik["frazy"][21]["liczba"], 2)
+        self.assertIn(25, wynik["frazy"])
+
     def test_zwrot_w_cudzyslowie_i_slowa_kluczowe_to_nie_wzorzec(self):
         wynik = metryki_pl.zmierz(["Reguła zamienia „warto wskazać” na nic. Słowa kluczowe: prawo, styl."])
         self.assertEqual(wynik["frazy"], {})
@@ -108,6 +124,10 @@ class Porownanie(unittest.TestCase):
         roznice = porownaj_wersje.porownaj("Strona nie może „zrzec się prawa”.", "Strona może „zrzec się praw”.")
         self.assertEqual(roznice["przeczenia"]["zmiany"], {"nie": [1, 0]})
         self.assertEqual(roznice["cytaty"], {"zniknelo": ["zrzec się prawa"], "pojawilo_sie": ["zrzec się praw"]})
+
+    def test_polpauza_w_przedziale_na_lacznik_to_nie_roznica(self):
+        roznice = porownaj_wersje.porownaj("Dane z lat 2019–2024, s. 10–12 [3–5].", "Dane z lat 2019-2024, s. 10-12 [3-5].")
+        self.assertEqual(roznice, {})
 
     def test_hash_commita_to_nie_liczba(self):
         self.assertNotIn("liczby", porownaj_wersje.porownaj("commit 65a8ec7", "commit 3e14aac"))
