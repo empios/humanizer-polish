@@ -97,6 +97,10 @@ class Metryki(unittest.TestCase):
         wynik = metryki_pl.zmierz(["Opis jest w sekcji 3.2 i w tabeli 1.4 tego artykułu."])
         self.assertNotIn("kropka dziesiętna (do sprawdzenia)", wynik["typografia"])
 
+    def test_przecinek_dziesietny_to_nie_trojka(self):
+        zdanie = "Wynik od 0,215 do 0,285 uznajemy za graniczny i nie rozstrzygamy o nim."
+        self.assertEqual(metryki_pl.trojki(zdanie), [])
+
     def test_zdanie_podrzedne_to_nie_trojka(self):
         self.assertEqual(metryki_pl.trojki("Nie ma reguł, które poprawiają styl i nie zmieniają treści."), [])
 

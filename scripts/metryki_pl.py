@@ -175,7 +175,7 @@ def trojki(zdanie: str) -> list[str]:
     """Trzy krótkie, zrównoważone człony: „A, B i C” (stosunek długości członów ≤ 1,6)."""
     wynik = []
     for klauzula in re.split(r"[;:()]", zdanie):
-        czesci = [c.strip() for c in klauzula.split(",")]
+        czesci = [c.strip() for c in re.split(r",(?!\d)", klauzula)]  # nie dziel „0,215”
         for i in range(1, len(czesci)):
             m = _SPOJNIK_TROJKI.search(f" {czesci[i]} ")
             if not m:

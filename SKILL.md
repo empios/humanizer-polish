@@ -9,7 +9,7 @@ description: |
   negacji i ról stron.
 license: MIT
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Humanizer PL: wzorce pisania AI w polskim tekście

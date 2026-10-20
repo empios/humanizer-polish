@@ -1,5 +1,9 @@
 # Historia zmian
 
+## 1.1.1
+
+- `metryki_pl.py` nie dzieli zdania na przecinku dziesiętnym, więc „od 0,215 do 0,285” nie jest już liczone jako trójka (§6). Fałszywy alarm wyszedł na manuskrypcie naukowym.
+
 ## 1.1.0
 
 - §8: w wersji końcowej nie ma pauzy (—) ani półpauzy (–). Jedyną kreską jest łącznik ASCII (-), także w przedziałach („2019-2024”). Myślniki z próbki autora skill zapisuje jako ` - `. Walidator odrzuca półpauzę w `SKILL.md` poza §8, a `metryki_pl.py` liczy każdą półpauzę i łącznik ze spacjami.
