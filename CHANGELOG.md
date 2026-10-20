@@ -1,5 +1,12 @@
 # Historia zmian
 
+## 1.1.0
+
+- §8: w wersji końcowej nie ma pauzy (—) ani półpauzy (–). Jedyną kreską jest łącznik ASCII (-), także w przedziałach („2019-2024”). Myślniki z próbki autora skill zapisuje jako ` - `. Walidator odrzuca półpauzę w `SKILL.md` poza §8, a `metryki_pl.py` liczy każdą półpauzę i łącznik ze spacjami.
+- Zakaz wymyślania zdań: każde zdanie szkicu pochodzi ze zdania źródła, bez nowych przykładów, opinii, metafor, pytań, przejść i związków przyczynowych, także w fikcji. Krok 5 sprawdza, czy każde zdanie ma odpowiednik w źródle. Przykłady w §1, §2, §3, §6, §26 i §30 poprawiono, żeby niczego nie dopisywały; §30 nie każe już dopisywać definicji.
+- Nowe sygnały z bloga hum/dev, dopisane do istniejących wzorców: zdanie powtarzające poprzednie, pusty komentarz po cytacie i pytanie retoryczne bez odpowiedzi (§2), ozdobne metafory (§3), żargon w tekście dla laików (§12), przymiotniki emocjonalne i omówienia (§14), błędne DOI, bibliografia spoza tematu i wykresy z danymi „hipotetycznymi” (§17), przekręcone związki frazeologiczne (§18), „Zgodnie z poleceniem”, pola szablonu i resztki Markdownu (§21), akapit „z polskiej perspektywy”, pusta definicja i pojęcie bez opisu (§25). W „Kiedy nie działać” jest uwaga o detektorach opartych na perpleksji.
+- `metryki_pl.py` szuka nowych fraz z §3, §21 i §25. `porownaj_wersje.py` nie zgłasza różnicy, gdy półpauza w cytowaniu („[3–5]”) zmienia się w łącznik.
+
 ## 1.0.1
 
 - `metryki_pl.py` nie liczy zwrotów w cudzysłowie, bo tekst je omawia, a nie stosuje (zgodnie z „Kiedy nie działać”), ani etykiety „Słowa kluczowe” jako wzorca §12. Oba fałszywe alarmy wyszły na prawdziwych manuskryptach naukowych.
