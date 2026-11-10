@@ -147,12 +147,15 @@ właśnie chyba
 """.split())
 
 # Okolicznik na początku zdania, po którym polszczyzna nie stawia przecinka (§20). Przecinek
-# przed zdaniem podrzędnym albo wtrąceniem jest poprawny, więc wynik jest do sprawdzenia.
+# przed zdaniem podrzędnym, imiesłowem albo wtrąceniem jest poprawny, więc wynik jest do sprawdzenia.
+# Przykłady błędu podaje Mazur (2024), zob. references/zrodla.md.
 _PRZECINEK_PO_OKOLICZNIKU = re.compile(
     r"^(?:w kontekście|w przypadku|w obliczu|w ramach|w dobie|w świetle|w dzisiejszych czasach|"
-    r"w ostatnich latach|obecnie|współcześnie|dzisiaj|dziś)\b[^,]{0,60},\s+"
+    r"w ostatnich latach|w trakcie|w wyniku|na podstawie|z perspektywy|przez|poprzez|dzięki|podczas|"
+    r"obecnie|współcześnie|dzisiaj|dziś)\b[^,]{0,90},\s+"
     r"(?!(?:(?:w|na|o|z|do|po|dla|od|przy)\s+)?(?:któr\w*|gdy|kiedy|że|żeby|aby|jeśli|jeżeli|gdzie|co|"
-    r"jak|czy|a|ale|lecz|zwłaszcza|szczególnie|czyli|np|tj)\b)",
+    r"jak|czy|a|ale|lecz|bo|ponieważ|gdyż|więc|dlatego|choć|chociaż|by|i|oraz|lub|albo|ani|zwłaszcza|"
+    r"szczególnie|czyli|np|tj|\w+ąc)\b)",
     re.IGNORECASE,
 )
 

@@ -154,9 +154,12 @@ class NoweSygnaly(unittest.TestCase):
     def test_przecinek_po_okoliczniku(self):
         w = metryki_pl.zmierz([
             "W przypadku umów najmu, termin wynosi 14 dni. W przypadku umowy, którą zawarto w marcu, "
-            "termin już minął. W przypadku umów najmu termin wynosi 14 dni."
+            "termin już minął. W przypadku umów najmu termin wynosi 14 dni. "
+            "Przez analizę tych dzieł oraz odwołanie do kontekstów, postaram się ukazać konflikt. "
+            "Przez lata nikt tego nie sprawdzał, bo nie było narzędzi. "
+            "W ramach badania sprawdzono jakość tekstów, dając je do oceny pisarzom."
         ])
-        self.assertEqual(w["typografia"]["przecinek po okoliczniku na początku zdania (do sprawdzenia)"], 1)
+        self.assertEqual(w["typografia"]["przecinek po okoliczniku na początku zdania (do sprawdzenia)"], 2)
 
     def test_cudzyslow_po_tzw_i_czestosc_ktory(self):
         w = metryki_pl.zmierz(["Model, który pisze, to tzw. „duży model”, którego nikt nie sprawdza."])
