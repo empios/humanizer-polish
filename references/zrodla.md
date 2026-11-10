@@ -135,7 +135,7 @@ Audyt komercyjnych narzędzi, które przepisują tekst pod detektory. Wszystkie 
 
 *How to spot AI writing*. The Economist, 30 lipca 2026. Przedruk: https://www.hindustantimes.com/lifestyle/art-culture/how-to-spot-ai-writing-101785491459334.html
 
-Redakcja kazała czterem modelom napisać wersje własnych artykułów i porównała 55 940 zdań. Słowa uchodzące za znak modeli zanikły, a zostały słowa długie, uczone i nominalizacje; pauzę częściej niż ludzie stawiał już tylko jeden model; kontrast „nie X, lecz Y” i trójki nadal były częste. Dotyczy angielskiej publicystyki. Skill bierze stąd uwagę o starzeniu się list słów (§12) i nowe uzasadnienie §8.
+Redakcja kazała czterem modelom napisać wersje własnych artykułów i porównała 55 940 zdań. Słowa uchodzące za znak modeli zanikły, a zostały słowa długie, uczone i nominalizacje; pauzę częściej niż ludzie stawiał już tylko jeden model (sprawdzono w pełnym tekście przedruku); modele stawiały też mniej przecinków i średników, prawie nie używały nawiasów i pisały dłuższe zdania; kontrast „nie X, lecz Y” i trójki nadal były częste. Dotyczy angielskiej publicystyki. Skill bierze stąd uwagę o starzeniu się list słów (§12) i nowe uzasadnienie §8.
 
 ## Prosty język na UMCS (2026)
 
@@ -145,9 +145,9 @@ Poradnik uczelniany z polskimi sygnałami: „spotkanie” i „przestrzeń” w
 
 ## Mazur (2024)
 
-Mazur R. O poprawności językowej tekstów generowanych przez SI na przykładzie ChatuGPT. *LingVaria*. 2024. https://journals.akademicka.pl/lv/article/view/5756
+Mazur R. O poprawności językowej tekstów generowanych przez SI na przykładzie ChatuGPT. *LingVaria*. 2024. doi:10.12797/LV.19.2024.37.08
 
-Analiza błędów językowych w wypracowaniach maturalnych napisanych przez ChatGPT. Najwięcej błędów było w złożonych konstrukcjach. Według omówień artykułu częstym błędem interpunkcyjnym był zbędny przecinek, także po okoliczniku na początku zdania; tego szczegółu nie sprawdzono w pełnym tekście, więc §20 podaje go jako sygnał do sprawdzenia, bez liczb.
+Badanie pilotażowe: 25 wypracowań maturalnych napisanych przez darmową wersję ChatGPT (GPT-3.5), ocenionych według typologii błędów Markowskiego. Najwięcej błędów dotyczyło składni (35%), potem leksyki (24%, m.in. nietypowe połączenia wyrazów) i interpunkcji (22%). Z 48 błędów interpunkcyjnych 45 to zbędny znak, często przecinek po okoliczniku otwierającym zdanie albo po zestawieniu „zarówno…, jak i…”. Autor odnotowuje też liczne powtórzenia. Skill bierze stąd sygnał w §20 i regułę w `metryki_pl.py`; model jest stary, więc to wskazówka, nie próg.
 
 ## Przystalski i in. (2026)
 

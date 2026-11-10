@@ -1,5 +1,10 @@
 # Historia zmian
 
+## 1.2.1
+
+- `metryki_pl.py`: reguła przecinka po okoliczniku na początku zdania obejmuje też „przez”, „poprzez”, „dzięki”, „podczas”, „na podstawie” i dłuższe okoliczniki, a pomija przecinek przed spójnikiem („bo”, „więc”, „i”) i imiesłowem na „-ąc”. Na ok. 19 tys. słów tekstów pisanych przez ludzi nie dała fałszywego alarmu.
+- `references/zrodla.md`: szczegóły z Mazura (2024) i z „The Economist” (2026) sprawdzono w pełnych tekstach; opis Mazura ma teraz DOI i liczby.
+
 ## 1.2.0
 
 - Nowe sygnały dopisane do istniejących wzorców: „tam, gdzie X spotyka się z Y” i „tworzyć przestrzeń do” (§3), wyliczenie „od X, przez Y, aż po Z” (§6), zdania z „który” doklejane do co drugiego rzeczownika (§10), przecinek po okoliczniku na początku zdania, cudzysłów po „tzw.” i podwójne wyróżnienie tytułu (§20), realia z pocztówki w fikcji (§25).
