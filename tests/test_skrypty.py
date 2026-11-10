@@ -137,5 +137,32 @@ class Porownanie(unittest.TestCase):
         self.assertNotIn("liczby", porownaj_wersje.porownaj("commit 65a8ec7", "commit 3e14aac"))
 
 
+
+class NoweSygnaly(unittest.TestCase):
+    def test_frazy_z_poradnika_umcs(self):
+        w = metryki_pl.zmierz([
+            "To miejsce, gdzie sztuka spotyka się z biznesem. Tworzy się przestrzeń do rozmowy o nauce. "
+            "Program obejmuje wszystko, od literatury, przez sztukę, aż po biznes."
+        ])
+        self.assertEqual(w["frazy"][3]["liczba"], 2)
+        self.assertEqual(w["frazy"][6]["liczba"], 1)
+
+    def test_doslowne_spotkanie_nie_jest_wzorcem(self):
+        w = metryki_pl.zmierz(["Dyrektor spotyka się z radą w piątek."])
+        self.assertNotIn(3, w["frazy"])
+
+    def test_przecinek_po_okoliczniku(self):
+        w = metryki_pl.zmierz([
+            "W przypadku umów najmu, termin wynosi 14 dni. W przypadku umowy, którą zawarto w marcu, "
+            "termin już minął. W przypadku umów najmu termin wynosi 14 dni."
+        ])
+        self.assertEqual(w["typografia"]["przecinek po okoliczniku na początku zdania (do sprawdzenia)"], 1)
+
+    def test_cudzyslow_po_tzw_i_czestosc_ktory(self):
+        w = metryki_pl.zmierz(["Model, który pisze, to tzw. „duży model”, którego nikt nie sprawdza."])
+        self.assertEqual(w["typografia"]["cudzysłów po „tzw.”"], 1)
+        self.assertEqual(w["zdanie"]["ktory_na_1000_slow"], round(1000 * 2 / w["slowa"], 1))
+
+
 if __name__ == "__main__":
     unittest.main()

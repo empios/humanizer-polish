@@ -37,6 +37,8 @@ FRAZY: dict[int, tuple[str, list[str]]] = {
         r"\bprawdziwe pytanie brzmi\b", r"\btak naprawdę liczy się\b", r"\bfundamentaln\w+ kwesti\w+",
         r"\bw gruncie rzeczy\b", r"\bbezpieczn\w+ przysta\w+", r"\bcyfrow\w+ amnezj\w+",
         r"\bbibliotek\w+ aleksandryjsk\w+", r"\bpaliw\w* dla (?:algorytm|model|sztuczn|ai\b)\w*",
+        r"\bgdzie\s[^,.;]{1,40}\sspotyka\w*\s+się\s+z\b",
+        r"\bprzestrze\w+\s+(?:do|dla)\s+(?:rozm\w+|dialog\w*|dyskusj\w+|wymian\w+|refleksj\w+|współprac\w+)",
     ]),
     4: ("Zapowiedź zamiast treści", [
         r"\b(?:warto|należy)\s+(?:(?:również|także|przy tym|jednak)\s+)?(?:wskazać|zauważyć|podkreślić|"
@@ -48,6 +50,9 @@ FRAZY: dict[int, tuple[str, list[str]]] = {
         r"\bmożna by (?:sądzić|pomyśleć|uznać)\b", r"\bkuszące (?:byłoby|jest)\b",
         r"\bnie zrozummy się źle\b", r"\bżeby było jasne\b", r"\bktoś mógłby (?:zarzucić|powiedzieć)\b",
         r"\bnie twierdzę, że\b", r"\bnie chodzi (?:tu )?o to, by\b",
+    ]),
+    6: ("Wymuszone trójki", [
+        r"\bod\s[^,.;]{1,40},\s*(?:przez|poprzez)\s[^,.;]{1,40},?\s*(?:aż\s+)?po\b",
     ]),
     9: ("Piętrowe asekuracje", [
         r"\bmoże potencjalnie\b", r"\bpotencjalnie mógłby\w*", r"\bw pewnym (?:stopniu|sensie)\b",
@@ -140,6 +145,16 @@ kiedy jeśli jeżeli ponieważ bo więc zatem choć chociaż gdyż jak niż nato
 czyli mianowicie ponadto dlatego toteż jednocześnie tymczasem nie się to już jeszcze tylko nawet
 właśnie chyba
 """.split())
+
+# Okolicznik na początku zdania, po którym polszczyzna nie stawia przecinka (§20). Przecinek
+# przed zdaniem podrzędnym albo wtrąceniem jest poprawny, więc wynik jest do sprawdzenia.
+_PRZECINEK_PO_OKOLICZNIKU = re.compile(
+    r"^(?:w kontekście|w przypadku|w obliczu|w ramach|w dobie|w świetle|w dzisiejszych czasach|"
+    r"w ostatnich latach|obecnie|współcześnie|dzisiaj|dziś)\b[^,]{0,60},\s+"
+    r"(?!(?:(?:w|na|o|z|do|po|dla|od|przy)\s+)?(?:któr\w*|gdy|kiedy|że|żeby|aby|jeśli|jeżeli|gdzie|co|"
+    r"jak|czy|a|ale|lecz|zwłaszcza|szczególnie|czyli|np|tj)\b)",
+    re.IGNORECASE,
+)
 
 _SPOJNIK_TROJKI = re.compile(r"\s(?:oraz|a także|i)\s")
 _PODRZEDNE = re.compile(
@@ -257,6 +272,9 @@ def zmierz(akapity: list[str]) -> dict:
         "kropka dziesiętna (do sprawdzenia)": _kropki_dziesietne(caly),
         "przecinek przed i/oraz/lub/albo (do sprawdzenia)": len(re.findall(r",\s(?:i|oraz|lub|albo)\s", caly)),
         "podwójna spacja": len(re.findall(r"\S  +\S", caly)),
+        "przecinek po okoliczniku na początku zdania (do sprawdzenia)":
+            sum(1 for z in wszystkie if _PRZECINEK_PO_OKOLICZNIKU.match(z)),
+        "cudzysłów po „tzw.”": len(re.findall(r"\btzw\.\s*[„\"“]", caly)),
     }
 
     dl_akap_zd = [len(zs) for zs in zd_akapitow]
@@ -275,6 +293,7 @@ def zmierz(akapity: list[str]) -> dict:
             "max": max(dl_zdan, default=None),
             "krotkie_do_8_proc": _proc(sum(d <= 8 for d in dl_zdan), len(dl_zdan)),
             "dlugie_od_35_proc": _proc(sum(d >= 35 for d in dl_zdan), len(dl_zdan)),
+            "ktory_na_1000_slow": round(1000 * sum(t.startswith("któr") for t in tokeny) / liczba_slow, 1),
         },
         "akapit": {
             "srednia_zdan": round(statistics.mean(dl_akap_zd), 1) if dl_akap_zd else None,
@@ -323,6 +342,7 @@ def raport(nazwa: str, w: dict) -> str:
         f"  zdanie: średnio {_liczba(z['srednia'])} słów, mediana {_liczba(z['mediana'])}, "
         f"CV {_liczba(z['cv'])}, od {_liczba(z['min'])} do {_liczba(z['max'])}",
         f"  zdania do 8 słów: {_liczba(z['krotkie_do_8_proc'])}%, od 35 słów: {_liczba(z['dlugie_od_35_proc'])}%",
+        f"  zaimek „który”: {_liczba(z['ktory_na_1000_slow'])} na 1000 słów",
         f"  akapit: średnio {_liczba(a['srednia_zdan'])} zdań (CV {_liczba(a['cv_zdan'])}), "
         f"{_liczba(a['srednia_slow'])} słów (CV {_liczba(a['cv_slow'])})",
         "",
