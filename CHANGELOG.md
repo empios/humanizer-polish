@@ -1,5 +1,15 @@
 # Historia zmian
 
+## 1.2.0
+
+- Nowe sygnały dopisane do istniejących wzorców: „tam, gdzie X spotyka się z Y” i „tworzyć przestrzeń do” (§3), wyliczenie „od X, przez Y, aż po Z” (§6), zdania z „który” doklejane do co drugiego rzeczownika (§10), przecinek po okoliczniku na początku zdania, cudzysłów po „tzw.” i podwójne wyróżnienie tytułu (§20), realia z pocztówki w fikcji (§25).
+- §8: pauza nie jest już pewnym śladem modelu (pomiar „The Economist”, 2026). Zakaz kresek typograficznych zostaje jako reguła redakcyjna.
+- §12: lista słów się starzeje. §11 i §16: styl rzeczownikowy i imiesłowowe doczepki modeli potwierdza badanie Reinharta i in. (2025).
+- „Głos”: w tekście literackim skill nie domyka wieloznaczności ani urwanych zdań. Krok 4: równego rytmu nie zastępuje serią krótkich puent.
+- „Kiedy nie działać”: wprawni czytelnicy rozpoznają tekst modelu także po parafrazie (Russell i in., 2025). Grupa G powołuje się na audyt „humanizerów”, które gubią liczby i cytaty (Wang i in., 2026).
+- `metryki_pl.py` szuka nowych fraz z §3 i §6, liczy „który” na 1000 słów, przecinek po okoliczniku na początku zdania i cudzysłów po „tzw.”.
+- `references/zrodla.md`: nowe źródła, w tym pięć wpisów hum/dev, polskie badanie Kutyły i in. (2026) i poradnik prostego języka UMCS.
+
 ## 1.1.1
 
 - `metryki_pl.py` nie dzieli zdania na przecinku dziesiętnym, więc „od 0,215 do 0,285” nie jest już liczone jako trójka (§6). Fałszywy alarm wyszedł na manuskrypcie naukowym.

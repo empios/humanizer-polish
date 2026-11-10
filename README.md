@@ -69,7 +69,7 @@ Oba działają na samej bibliotece standardowej Pythona 3.10+ i czytają `.txt`,
 python3 scripts/metryki_pl.py tekst.docx
 ```
 
-Podaje długość i zmienność (CV) zdań i akapitów, łączniki na 1000 słów, serie zdań od tego samego słowa, różnorodność słów funkcyjnych, frazy z list wzorców, trójki i uwagi typograficzne. Opcja `--json` daje wynik do dalszej obróbki. Progu uniwersalnego nie ma: porównuj z tekstami tego samego gatunku i autora.
+Podaje długość i zmienność (CV) zdań i akapitów, łączniki na 1000 słów, serie zdań od tego samego słowa, częstość „który”, różnorodność słów funkcyjnych, frazy z list wzorców, trójki i uwagi typograficzne. Opcja `--json` daje wynik do dalszej obróbki. Progu uniwersalnego nie ma: porównuj z tekstami tego samego gatunku i autora.
 
 ```bash
 python3 scripts/porownaj_wersje.py przed.docx po.docx
@@ -93,7 +93,7 @@ Dwie lekcje z praktyki, które skill zapisuje wprost: podmiana synonimów bez zm
 |---|---|---|---|
 | 1 | **Nie X, lecz Y** | „Nie chodzi o X, lecz o Y”, „Nie oznacza to, że X. Oznacza to, że Y.” | Podać myśl wprost; kontrast normatywny zostaje |
 | 2 | **Puenty i dramatyczne równoważniki** | „To zmienia wszystko.”, „Wniosek jest prosty:”, „Bez kompromisów. Bez wyjątków.”, pusty komentarz po cytacie, pytanie retoryczne bez odpowiedzi | Wyciąć zamknięcie, które powtarza; połączyć równoważniki w zdanie |
-| 3 | **Pozorna głębia** | „U podstaw leży…”, „Prawdziwe pytanie brzmi…”, „X to waluta Y”, „bezpieczna przystań”, „paliwo dla algorytmów” | Zastąpić dosłownym twierdzeniem, bez nowych szczegółów |
+| 3 | **Pozorna głębia** | „U podstaw leży…”, „Prawdziwe pytanie brzmi…”, „X to waluta Y”, „bezpieczna przystań”, „paliwo dla algorytmów”, „tworzyć przestrzeń do rozmowy” | Zastąpić dosłownym twierdzeniem, bez nowych szczegółów |
 | 4 | **Zapowiedź zamiast treści** | „Warto podkreślić, że”, „Należy wskazać, że”, „W tym kontekście” | Zacząć od tego, co po „że”; „należy” nakazujące zostaje |
 | 5 | **Polemika z nikim** | „Można by sądzić, że…”, „Kuszące byłoby…” | Usunąć obronę przed zarzutem, którego nikt nie postawił |
 
@@ -101,11 +101,11 @@ Dwie lekcje z praktyki, które skill zapisuje wprost: podmiana synonimów bez zm
 
 | # | Wzorzec | Przykład | Co zrobić |
 |---|---|---|---|
-| 6 | **Wymuszone trójki** | „przejrzystość, rzetelność oraz odpowiedzialność” | Zostawić trzy człony tylko wtedy, gdy treść ma trzy części |
+| 6 | **Wymuszone trójki** | „przejrzystość, rzetelność oraz odpowiedzialność”, „od X, przez Y, aż po Z” | Zostawić trzy człony tylko wtedy, gdy treść ma trzy części |
 | 7 | **Powtarzane początki i łączniki** | „Ponadto… Co więcej… Dodatkowo…”, „więc” w co drugim zdaniu | Usunąć zbędny łącznik, zmienić powtarzany, połączyć zdania |
 | 8 | **Myślnik jako uniwersalny łącznik** | „procedura—wprowadzona bez konsultacji—obejmuje” | Przecinek, dwukropek, nawias albo kropka; bez pauzy i półpauzy, jedyna kreska to łącznik ASCII (-), także w przedziałach |
 | 9 | **Piętrowe asekuracje** | „można by potencjalnie przypuszczać, że mogłoby w pewnym stopniu” | Jedno zastrzeżenie, jeśli uzasadnia je źródło |
-| 10 | **Jednolity rytm i szyk** | zdania podobnej długości, każde od podmiotu | Zmieniać długość zdań i akapitów, używać inwersji |
+| 10 | **Jednolity rytm i szyk** | zdania podobnej długości, każde od podmiotu, „który” przy co drugim rzeczowniku | Zmieniać długość zdań i akapitów, używać inwersji |
 | 11 | **Rzeczowniki zamiast czasowników** | „dokonano analizy w celu przeprowadzenia weryfikacji” | Czasownik zamiast rzeczownika odczasownikowego |
 
 ### C. Napuszenie i pożyczony autorytet
@@ -125,7 +125,7 @@ Dwie lekcje z praktyki, które skill zapisuje wprost: podmiana synonimów bez zm
 | # | Wzorzec | Przykład | Co zrobić |
 |---|---|---|---|
 | 19 | **Pogrubienia, listy i nagłówki z reguły** | „**Szybkość:** …”, „Wyniki I Dyskusja” | Zdania zamiast list z etykietami; polska wielkość liter |
-| 20 | **Angielska typografia** | "cudzysłów", 0.53, „A, B, i C” | „…”, przecinek dziesiętny, bez przecinka przed „i” |
+| 20 | **Angielska typografia** | "cudzysłów", 0.53, „A, B, i C”, „W przypadku umów, termin…”, cudzysłów po „tzw.” | „…”, przecinek dziesiętny, bez przecinka przed „i” i po początkowym okoliczniku |
 
 ### E. Pozostałości
 
@@ -140,7 +140,7 @@ Dwie lekcje z praktyki, które skill zapisuje wprost: podmiana synonimów bez zm
 | # | Wzorzec | Przykład | Co zrobić |
 |---|---|---|---|
 | 24 | **Poszarpana parafraza** | akapit gubi zapowiedzianą myśl, zdania do siebie nie pasują | Jedna myśl na akapit; niejasny termin zgłosić |
-| 25 | **Ogólnik zamiast faktu** | „liczne badania”, „znaczna poprawa”, „z polskiej perspektywy” pasujące do każdego kraju, pusta definicja | Liczba, data, nazwa ze źródła; niczego nie wymyślać |
+| 25 | **Ogólnik zamiast faktu** | „liczne badania”, „znaczna poprawa”, „z polskiej perspektywy” pasujące do każdego kraju, realia z pocztówki w fikcji, pusta definicja | Liczba, data, nazwa ze źródła; niczego nie wymyślać |
 | 26 | **Tłumaczenie adresatowi tego, co wie** | „Jak Pan wie, umowa została zawarta…” | Zacząć od odpowiedzi albo decyzji |
 
 ### G. Czego redakcja nie może zepsuć
@@ -160,6 +160,9 @@ Pełne opisy: [`references/zrodla.md`](references/zrodla.md).
 - [humanize-pl](https://github.com/empios/humanize-pl): polskie listy fraz i kontrole elementów chronionych.
 - hum/dev: [rozpoznawanie tekstu akademickiego AI bez detektora](https://blog.humanistyka.dev/2026/10/jak-bez-pangrama-rozpoznac-tekst-akademicki-wygenerowany-przez-ai), [stylometria tekstów maszynowych](https://blog.humanistyka.dev/2026/03/stylometryczne-cechy-tekstow-generowanych-maszynowo), [taksonomia GAIDeT](https://blog.humanistyka.dev/2025/09/taksonomia-gaidet-jak-raportowac-uzycie-sztucznej-inteligencji-w-pisaniu), [eksperyment z wpisem z AI](https://blog.humanistyka.dev/2026/02/probowalem-wygenerowac-w-ai-wpis-na-tego-bloga-i-skonczylo-sie-to-katastrofa), [slop w tekstach](https://blog.humanistyka.dev/2025/12/jak-rozpoznawac-slopy-ai-w-tekstach-na-pewno-nie-maszynowo), [akademicki slop](https://blog.humanistyka.dev/2026/08/janet-h-murray-nick-monfort-i-mykotoksyny-w-krowim-mleku), [perpleksja i Wikipedia](https://blog.humanistyka.dev/2025/08/jak-rozpoznac-czy-tekst-zostal-wygenerowany-przez-ai-ograniczenia-perpleksji-i-propozycja-wikipedii), [pięć grup cech](https://blog.humanistyka.dev/2026/02/rozpoznawanie-tekstow-ai-piec-grup-cech-zamiast-jednego-wskaznika).
 - Przystalski K, Argasiński JK, Grabska-Gradzińska I, Ochab JK. Stylometry recognizes human and LLM-generated texts in short samples. *Expert Systems with Applications*. 2026;296:129001. doi:[10.1016/j.eswa.2025.129001](https://doi.org/10.1016/j.eswa.2025.129001)
+- Kutyła M, Gryka P, Kozłowski M, Gradoń K, Janicki A. Feature comparison between human-written and LLM-generated documents – a case study. *Poznań Studies in Contemporary Linguistics*. 2026. doi:[10.1515/psicl-2025-0063](https://doi.org/10.1515/psicl-2025-0063)
+- Reinhart A. i in. Do LLMs write like humans? Variation in grammatical and rhetorical styles. *PNAS*. 2025. doi:[10.1073/pnas.2422455122](https://doi.org/10.1073/pnas.2422455122)
+- Russell J, Karpinska M, Iyyer M. People who frequently use ChatGPT for writing tasks are accurate and robust detectors of AI-generated text. Preprint arXiv, 2025. [arXiv:2501.15654](https://arxiv.org/abs/2501.15654)
 - Suchikova Y. i in. GAIDeT (Generative AI Delegation Taxonomy). *Accountability in Research*. 2025. doi:[10.1080/08989621.2025.2544331](https://doi.org/10.1080/08989621.2025.2544331)
 
 ## English
