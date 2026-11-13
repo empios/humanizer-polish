@@ -12,6 +12,7 @@ import json
 import re
 import statistics
 import sys
+import zlib
 from collections import Counter
 from pathlib import Path
 
@@ -26,6 +27,7 @@ FRAZY: dict[int, tuple[str, list[str]]] = {
         r"\bnie chodzi\s+(?:\w+\s+){0,3}?o\b[^.!?]{0,120}?,\s*(?:lecz|ale)\b",
         r"\bnie oznacza to(?:\s+jednak)?,?\s+że\b",
         r"^to nie\s+\w+[^.!?]{0,60},\s*to\b",
+        r"\bcoś więcej niż\b",
     ]),
     2: ("Puenty i dramatyczne równoważniki", [
         r"\bto zmienia wszystko\b", r"\bwniosek jest (?:prosty|jasny|oczywisty)\b",
@@ -159,6 +161,11 @@ _PRZECINEK_PO_OKOLICZNIKU = re.compile(
     re.IGNORECASE,
 )
 
+# Znaki niewidoczne w druku: spacje o zerowej szerokości, łącznik słów, BOM, miękki dywiz (§20).
+_NIEWIDOCZNE = re.compile("[\u200b\u200c\u200d\u2060\ufeff\u00ad]")
+# Słowo z literami łacińskimi i cyrylicą naraz, np. „mоdel” z cyrylickim „о” (§20).
+_CYRYLICA_W_SLOWIE = re.compile(r"\b(?=\w*[a-zA-Ząćęłńóśźż])(?=\w*[\u0400-\u04ff])\w+\b")
+
 _SPOJNIK_TROJKI = re.compile(r"\s(?:oraz|a także|i)\s")
 _PODRZEDNE = re.compile(
     r"^(?:któr\w*|że|żeby|aby|by|gdy|gdyż|kiedy|jeśli|jeżeli|bo|ponieważ|choć|chociaż|"
@@ -187,6 +194,27 @@ def mattr(tokeny: list[str], okno: int) -> float | None:
             del licznik[stary]
         suma += len(licznik)
     return suma / (len(tokeny) - okno + 1) / okno
+
+
+def zmiennosc_lokalna(dlugosci: list[int]) -> float | None:
+    """Średnia różnica długości kolejnych zdań podzielona przez średnią długość zdania."""
+    if len(dlugosci) < 2 or statistics.mean(dlugosci) == 0:
+        return None
+    roznice = [abs(b - a) for a, b in zip(dlugosci, dlugosci[1:])]
+    return statistics.mean(roznice) / statistics.mean(dlugosci)
+
+
+def kompresja(tekst: str, okno: int = 2000) -> float | None:
+    """Ile razy zlib zmniejsza tekst, średnio w oknach po `okno` znaków.
+
+    Wyższy wynik znaczy więcej powtórzeń słów i konstrukcji. Wynik rośnie z długością okna,
+    więc krótszy tekst liczy się w całości i porównuje się tylko teksty podobnej długości.
+    """
+    if not tekst:
+        return None
+    okna = [tekst[i:i + okno] for i in range(0, len(tekst) - okno + 1, okno)] or [tekst]
+    ilorazy = [len(o.encode()) / len(zlib.compress(o.encode(), 9)) for o in okna]
+    return statistics.mean(ilorazy)
 
 
 def trojki(zdanie: str) -> list[str]:
@@ -262,6 +290,7 @@ def zmierz(akapity: list[str]) -> dict:
                     trafienia.append(m.group(0))
         if trafienia:
             frazy[nr] = {"nazwa": nazwa, "liczba": len(trafienia),
+                         "na_1000_slow": round(1000 * len(trafienia) / liczba_slow, 1),
                          "przyklady": [k for k, _ in Counter(t.lower() for t in trafienia).most_common(5)]}
 
     znalezione_trojki = [t for z in wszystkie for t in trojki(z)]
@@ -278,6 +307,8 @@ def zmierz(akapity: list[str]) -> dict:
         "przecinek po okoliczniku na początku zdania (do sprawdzenia)":
             sum(1 for z in wszystkie if _PRZECINEK_PO_OKOLICZNIKU.match(z)),
         "cudzysłów po „tzw.”": len(re.findall(r"\btzw\.\s*[„\"“]", caly)),
+        "znaki niewidoczne (zerowa szerokość, miękki dywiz)": len(_NIEWIDOCZNE.findall(caly)),
+        "cyrylica w słowie łacińskim": len(_CYRYLICA_W_SLOWIE.findall(caly)),
     }
 
     dl_akap_zd = [len(zs) for zs in zd_akapitow]
@@ -296,6 +327,8 @@ def zmierz(akapity: list[str]) -> dict:
             "max": max(dl_zdan, default=None),
             "krotkie_do_8_proc": _proc(sum(d <= 8 for d in dl_zdan), len(dl_zdan)),
             "dlugie_od_35_proc": _proc(sum(d >= 35 for d in dl_zdan), len(dl_zdan)),
+            "pasmo_10_30_proc": _proc(sum(10 <= d <= 30 for d in dl_zdan), len(dl_zdan)),
+            "zmiennosc_lokalna": _r(zmiennosc_lokalna(dl_zdan)),
             "ktory_na_1000_slow": round(1000 * sum(t.startswith("któr") for t in tokeny) / liczba_slow, 1),
         },
         "akapit": {
@@ -316,9 +349,12 @@ def zmierz(akapity: list[str]) -> dict:
         "roznorodnosc": {
             "mattr_slow_100": _r(mattr(tokeny, 100)),
             "mattr_funkcyjnych_50": _r(mattr(tokeny_funkcyjne, 50)),
+            "kompresja_zlib": _r(kompresja(" ".join(wszystkie))),
         },
         "frazy": frazy,
-        "trojki": {"liczba": len(znalezione_trojki), "przyklady": znalezione_trojki[:5]},
+        "trojki": {"liczba": len(znalezione_trojki),
+                   "na_1000_slow": round(1000 * len(znalezione_trojki) / liczba_slow, 1),
+                   "przyklady": znalezione_trojki[:5]},
         "typografia": {k: v for k, v in typografia.items() if v},
     }
 
@@ -344,7 +380,9 @@ def raport(nazwa: str, w: dict) -> str:
         "Rytm (§10)",
         f"  zdanie: średnio {_liczba(z['srednia'])} słów, mediana {_liczba(z['mediana'])}, "
         f"CV {_liczba(z['cv'])}, od {_liczba(z['min'])} do {_liczba(z['max'])}",
-        f"  zdania do 8 słów: {_liczba(z['krotkie_do_8_proc'])}%, od 35 słów: {_liczba(z['dlugie_od_35_proc'])}%",
+        f"  zdania do 8 słów: {_liczba(z['krotkie_do_8_proc'])}%, od 35 słów: {_liczba(z['dlugie_od_35_proc'])}%, "
+        f"od 10 do 30 słów: {_liczba(z['pasmo_10_30_proc'])}%",
+        f"  zmienność lokalna (różnica długości kolejnych zdań / średnia): {_liczba(z['zmiennosc_lokalna'])}",
         f"  zaimek „który”: {_liczba(z['ktory_na_1000_slow'])} na 1000 słów",
         f"  akapit: średnio {_liczba(a['srednia_zdan'])} zdań (CV {_liczba(a['cv_zdan'])}), "
         f"{_liczba(a['srednia_slow'])} słów (CV {_liczba(a['cv_slow'])})",
@@ -361,14 +399,16 @@ def raport(nazwa: str, w: dict) -> str:
     linie += [
         f"  różnorodność słów funkcyjnych (MATTR, okno 50): {_liczba(r['mattr_funkcyjnych_50'])}",
         f"  różnorodność słów (MATTR, okno 100): {_liczba(r['mattr_slow_100'])}",
+        f"  powtarzalność (kompresja zlib, okno 2000 znaków): {_liczba(r['kompresja_zlib'])}",
         "",
         "Frazy z list",
     ]
     if not w["frazy"]:
         linie.append("  brak")
     for nr, f in sorted(w["frazy"].items()):
-        linie.append(f"  §{nr} {f['nazwa']}: {f['liczba']} ({'; '.join(f['przyklady'])})")
-    linie += ["", f"Trójki (§6): {w['trojki']['liczba']}"]
+        linie.append(f"  §{nr} {f['nazwa']}: {f['liczba']}, {_liczba(f['na_1000_slow'])} na 1000 słów "
+                     f"({'; '.join(f['przyklady'])})")
+    linie += ["", f"Trójki (§6): {w['trojki']['liczba']}, {_liczba(w['trojki']['na_1000_slow'])} na 1000 słów"]
     linie += [f"  {t}" for t in w["trojki"]["przyklady"]]
     linie += ["", "Typografia (§8, §20)"]
     linie += [f"  {k}: {v}" for k, v in w["typografia"].items()] or ["  bez uwag"]

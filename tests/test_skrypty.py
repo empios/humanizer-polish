@@ -167,5 +167,29 @@ class NoweSygnaly(unittest.TestCase):
         self.assertEqual(w["zdanie"]["ktory_na_1000_slow"], round(1000 * 2 / w["slowa"], 1))
 
 
+class MiaryZBadan(unittest.TestCase):
+    def test_pasmo_i_zmiennosc_lokalna(self):
+        self.assertEqual(metryki_pl.zmiennosc_lokalna([10, 20, 10]), 10 / (40 / 3))
+        self.assertIsNone(metryki_pl.zmiennosc_lokalna([7]))
+        w = metryki_pl.zmierz(["Tak. " + "To zdanie ma dokładnie dziesięć słów i kończy się tutaj teraz. " * 3])
+        self.assertEqual(w["zdanie"]["pasmo_10_30_proc"], 75.0)
+
+    def test_kompresja_rosnie_z_powtorzeniami(self):
+        rozne = "Sąd oddalił apelację, bo pozwany nie wykazał szkody. Biegły ocenił dach inaczej niż inwestor."
+        self.assertGreater(metryki_pl.kompresja(rozne * 10), metryki_pl.kompresja(rozne))
+        self.assertIsNone(metryki_pl.kompresja(""))
+
+    def test_czestosci_na_1000_slow_i_nowy_kontrast(self):
+        w = metryki_pl.zmierz(["To coś więcej niż narzędzie, to nowy sposób pracy. Styl: jasny, krótki i rzeczowy."])
+        self.assertEqual(w["frazy"][1]["liczba"], 1)
+        self.assertEqual(w["frazy"][1]["na_1000_slow"], round(1000 / w["slowa"], 1))
+        self.assertEqual(w["trojki"]["na_1000_slow"], round(1000 / w["slowa"], 1))
+
+    def test_znaki_niewidoczne_i_cyrylica(self):
+        w = metryki_pl.zmierz(["Ten mоdel​ pisze po polsku, a model pisze też słowo модель."])
+        self.assertEqual(w["typografia"]["znaki niewidoczne (zerowa szerokość, miękki dywiz)"], 1)
+        self.assertEqual(w["typografia"]["cyrylica w słowie łacińskim"], 1)
+
+
 if __name__ == "__main__":
     unittest.main()

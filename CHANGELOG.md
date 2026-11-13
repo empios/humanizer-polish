@@ -1,5 +1,11 @@
 # Historia zmian
 
+## 1.3.0
+
+- `metryki_pl.py` ma nowe miary z badań nad tekstem modeli: odsetek zdań o długości 10-30 słów i różnicę długości kolejnych zdań (§10), powtarzalność tekstu mierzoną kompresją zlib, częstość fraz i trójek na 1000 słów oraz niewidoczne znaki i cyrylicę w łacińskich słowach (§20). Szuka też „coś więcej niż” (§1).
+- §1: nowy wariant kontrastu „to coś więcej niż X, to Y”. §12: synonim z tej samej rodziny zostawia wzorzec. §20: niewidoczne znaki i cyrylicę trzeba usunąć.
+- „Kiedy nie działać”: poprawna pisownia nie świadczy o AI, więc skill nie dodaje błędów.
+
 ## 1.2.1
 
 - `metryki_pl.py`: reguła przecinka po okoliczniku na początku zdania obejmuje też „przez”, „poprzez”, „dzięki”, „podczas”, „na podstawie” i dłuższe okoliczniki, a pomija przecinek przed spójnikiem („bo”, „więc”, „i”) i imiesłowem na „-ąc”. Na ok. 19 tys. słów tekstów pisanych przez ludzi nie dała fałszywego alarmu.

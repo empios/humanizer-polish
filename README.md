@@ -69,7 +69,7 @@ Oba działają na samej bibliotece standardowej Pythona 3.10+ i czytają `.txt`,
 python3 scripts/metryki_pl.py tekst.docx
 ```
 
-Podaje długość i zmienność (CV) zdań i akapitów, łączniki na 1000 słów, serie zdań od tego samego słowa, częstość „który”, różnorodność słów funkcyjnych, frazy z list wzorców, trójki i uwagi typograficzne. Opcja `--json` daje wynik do dalszej obróbki. Progu uniwersalnego nie ma: porównuj z tekstami tego samego gatunku i autora.
+Podaje długość i zmienność (CV) zdań i akapitów, odsetek zdań o długości 10-30 słów, różnicę długości kolejnych zdań, łączniki na 1000 słów, serie zdań od tego samego słowa, częstość „który”, różnorodność słów funkcyjnych, powtarzalność tekstu (kompresja zlib), frazy z list wzorców i trójki z częstością na 1000 słów oraz uwagi typograficzne, w tym niewidoczne znaki i cyrylicę w łacińskich słowach. Opcja `--json` daje wynik do dalszej obróbki. Progu uniwersalnego nie ma: porównuj z tekstami tego samego gatunku i autora.
 
 ```bash
 python3 scripts/porownaj_wersje.py przed.docx po.docx
